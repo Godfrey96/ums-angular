@@ -8,6 +8,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxUiLoaderConfig, NgxUiLoaderModule, SPINNER } from 'ngx-ui-loader';
+import { HeaderComponent } from './shared/header/header.component';
+import { ShellComponent } from './shared/shell/shell.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: "Loading...",
@@ -15,14 +17,16 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   textPosition: "center-center",
   bgsColor: "#7b1fa2",
   fgsColor: "#7b1fa2",
-  fgsType: SPINNER.squareJellyBox,
+  fgsType: SPINNER.ballSpinClockwise,
   fgsSize: 100,
   hasProgressBar: false
 }
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    ShellComponent
   ],
   imports: [
     BrowserModule,
