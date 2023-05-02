@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxUiLoaderConfig, NgxUiLoaderModule, SPINNER } from 'ngx-ui-loader';
 import { HeaderComponent } from './shared/header/header.component';
 import { ShellComponent } from './shared/shell/shell.component';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { DashboardModule } from "./components/dashboard/dashboard.module";
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: "Loading...",
@@ -26,18 +29,21 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   declarations: [
     AppComponent,
     HeaderComponent,
-    ShellComponent
+    ShellComponent,
+    SidebarComponent,
+    PageNotFoundComponent
   ],
+  providers: [],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AuthModule,
+    DashboardModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     PaginationModule.forRoot(),
-    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+  ]
 })
 export class AppModule { }
