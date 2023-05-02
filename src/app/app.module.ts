@@ -13,6 +13,9 @@ import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DashboardModule } from "./components/dashboard/dashboard.module";
+import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: "Loading...",
@@ -31,19 +34,21 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     HeaderComponent,
     ShellComponent,
     SidebarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ConfirmDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AuthModule,
-    DashboardModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     PaginationModule.forRoot(),
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    ToastrModule.forRoot(),
+    NgbModule
   ]
 })
 export class AppModule { }
