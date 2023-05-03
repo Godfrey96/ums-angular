@@ -28,15 +28,11 @@ export class AuthService {
   }
 
   signup(user: User): Observable<User> {
-    return this.http.post(this.apiUrl + "/signup", user, {
-      headers: new HttpHeaders().set('Content-Type', 'application/json')
-    });
+    return this.http.post(this.apiUrl + "/signup", user);
   }
 
   login(data: any): Observable<any> {
-    return this.http.post(this.apiUrl + "/login", data, {
-      headers: new HttpHeaders().set('Content-Type', 'application/json')
-    });
+    return this.http.post(this.apiUrl + "/login", data);
   }
 
   changePassword(data: any) {
