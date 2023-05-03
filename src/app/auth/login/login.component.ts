@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
       } else {
         this.responseMessage = this.notificationService.showError("Something went wrong", "BAD REQUEST");
       }
-      this.notificationService.showError(this.responseMessage, "ERROR");
+      this.notificationService.showError("Invalid username or password", "ERROR");
     })
   }
 
