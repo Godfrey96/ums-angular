@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -28,14 +28,18 @@ export class AuthService {
   }
 
   signup(user: User): Observable<User> {
-    return this.http.post(this.apiUrl + "/signup", user);
+    return this.http.post(this.apiUrl + "/signup", user, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
   }
 
   login(data: any): Observable<any> {
-    return this.http.post(this.apiUrl + "/login", data);
+    return this.http.post(this.apiUrl + "/login", data, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
   }
 
-  changePassword(data: any): Observable<any> {
+  changePassword(data: any) {
     return this.http.post(this.apiUrl + "/changePassword", data);
   }
 

@@ -1,6 +1,8 @@
 <div class="app-header header-shadow">
   <div class="app-header__logo">
-    <div class="logo">UMS</div>
+    <div class="logo">
+      <a routerLink="/dashboard">UMS</a>
+    </div>
     <div class="header__pane ml-auto">
       <div>
         <button
@@ -69,7 +71,12 @@
                   <button type="button" tabindex="0" class="dropdown-item">
                     Edit Profile
                   </button>
-                  <button type="button" tabindex="0" class="dropdown-item">
+                  <button
+                    (click)="changePassword()"
+                    type="button"
+                    tabindex="0"
+                    class="dropdown-item"
+                  >
                     Change Password
                   </button>
                   <div tabindex="-1" class="dropdown-divider"></div>

@@ -23,9 +23,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  changePassword() {
+    this.router.navigate(['/change-password']);
+  }
 
   logout() {
-    this.confirmDialogService.confirm('Please confirm...', 'Are you sure you want want to logout?').then((confirmed) => {
+    this.confirmDialogService.confirm('Logout?', 'Are you sure you want want to logout?').then((confirmed: any) => {
       this.ngxService.start();
       this.authService.logout();
       this.notificationService.showSuccess("Successfully logged out", "SUCCESS");
