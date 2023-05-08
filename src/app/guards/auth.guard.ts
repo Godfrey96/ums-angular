@@ -25,6 +25,7 @@ export class AuthGuard implements CanActivate {
     var tokenPayLoad: any;
     try {
       tokenPayLoad = jwt_decode(token);
+      console.log("token-role: ", tokenPayLoad.role)
     } catch (error) {
       localStorage.clear();
       this.router.navigate(['/']);

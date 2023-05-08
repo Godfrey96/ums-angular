@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   isSubmitted = false;
   responseMessage: any;
+  role: any;
 
   constructor(
     private fb: FormBuilder,
@@ -49,7 +50,20 @@ export class LoginComponent implements OnInit {
       this.responseMessage = res?.message;
       this.notificationService.showSuccess("Successfully logged in", 'SUCCESS');
       localStorage.setItem('token', res.token);
+
+      // let token = localStorage.getItem('token');
+      // let decodedJWT = JSON.parse(window.atob(token!.split('.')[1]));
+
+      // this.role = decodedJWT.role;
+      // console.log('Inside login - role: ', this.role);
+
+      // console.log('login - role: ' + decodedJWT.role);
+
+      // if (this.role === 'admin') {
+      // }
       this.router.navigate(['/dashboard']);
+
+
     }, (error) => {
       this.ngxService.stop();
       if (error.error?.message) {

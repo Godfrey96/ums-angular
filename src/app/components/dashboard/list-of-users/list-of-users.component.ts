@@ -19,15 +19,6 @@ export class ListOfUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this._getAllUsersAndAdmins();
-
-    let token = localStorage.getItem('token');
-    let decodedJWT = JSON.parse(window.atob(token!.split('.')[1]));
-
-    this.role = decodedJWT.role;
-    console.log('role role: ', this.role);
-
-    console.log('name: ' + decodedJWT.username);
-    console.log('role: ' + decodedJWT.role);
   }
 
   private _getAllUsersAndAdmins() {

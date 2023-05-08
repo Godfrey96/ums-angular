@@ -15,4 +15,8 @@ export class UserService {
   getAllUsersAndAdmins() {
     return this.http.get(this.apiUrl + "/get-all");
   }
+
+  getAllUsers() {
+    return this.http.get(this.apiUrl + "/get");
+  }
 }
