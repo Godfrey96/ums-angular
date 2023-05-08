@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 
@@ -10,12 +10,21 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
 
   constructor(
+    private elementRef: ElementRef,
     private authService: AuthService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.loadScript();
     this.checkToken();
+  }
+
+  loadScript() {
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.src = "../assets/js/main.js";
+    this.elementRef.nativeElement.appendChild(s);
   }
 
   checkToken() {

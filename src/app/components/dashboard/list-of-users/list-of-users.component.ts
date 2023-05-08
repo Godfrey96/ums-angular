@@ -18,7 +18,7 @@ export class ListOfUsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._getAllUsersAndAdmins();
+    // this._getAllUsersAndAdmins();
   }
 
   private _getAllUsersAndAdmins() {

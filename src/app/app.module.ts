@@ -8,9 +8,6 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { AuthModule } from './auth/auth.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgxUiLoaderConfig, NgxUiLoaderModule, SPINNER } from 'ngx-ui-loader';
-import { HeaderComponent } from './shared/header/header.component';
-import { ShellComponent } from './shared/shell/shell.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DashboardModule } from "./components/dashboard/dashboard.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +16,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { TokenInterceptor } from './guards/token.interceptor';
+import { FooterComponent } from './layouts/footer/footer.component';
+import { HeaderComponent } from './layouts/header/header.component';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: "Loading...",
@@ -35,17 +35,13 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   declarations: [
     AppComponent,
     HeaderComponent,
-    ShellComponent,
     SidebarComponent,
     PageNotFoundComponent,
     ConfirmDialogComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    FooterComponent
   ],
-  providers: [
-    HttpClientModule,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
-  ],
-  bootstrap: [AppComponent],
+
   imports: [
     BrowserModule,
     AuthModule,
@@ -58,6 +54,12 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     ToastrModule.forRoot(),
     NgbModule
-  ]
+  ],
+
+  providers: [
+    // HttpClientModule,
+    // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
