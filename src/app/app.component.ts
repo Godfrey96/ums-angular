@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private authService: AuthService,
-    private router: Router
+    public router: Router
   ) { }
 
   ngOnInit(): void {
