@@ -31,7 +31,7 @@ export class SignupComponent implements OnInit {
 
   private _initSignupForm() {
     this.signUpForm = this.fb.group({
-      username: ['', Validators.required],
+      myUsername: ['', Validators.required],
       phoneNo: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -43,7 +43,7 @@ export class SignupComponent implements OnInit {
     this.isSubmitted = true;
 
     const user: User = {
-      username: this.signUpFormError['username'].value,
+      myUsername: this.signUpFormError['myUsername'].value,
       phoneNo: this.signUpFormError['phoneNo'].value,
       email: this.signUpFormError['email'].value,
       password: this.signUpFormError['password'].value,

@@ -27,14 +27,14 @@ const routes: Routes = [
   //   // },
   //   component: ChangePasswordComponent
   // },
-  { path: '', component: AdminDashboardComponent },
+  // { path: '', component: AdminDashboardComponent },
   { path: 'admin-dashboard', loadChildren: () => import('./pages/admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule) },
   { path: 'user-dashboard', loadChildren: () => import('./pages/user-dashboard/user-dashboard.module').then(m => m.UserDashboardModule) },
   { path: 'user-dashboard', loadChildren: () => import('./pages/user-dashboard/user-dashboard.module').then(m => m.UserDashboardModule) },
   { path: 'user-profile', loadChildren: () => import('./pages/user-profile/user-profile.module').then(m => m.UserProfileModule) },
   { path: 'all-users', loadChildren: () => import('./pages/all-users/all-users.module').then(m => m.AllUsersModule) },
   { path: '**', component: PageNotFoundComponent },
-  // { path: 'login', loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule) },
+  { path: 'login', loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule) },
 ];
 
 @NgModule({
