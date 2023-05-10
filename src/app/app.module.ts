@@ -9,7 +9,6 @@ import { AuthModule } from './auth/auth.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgxUiLoaderConfig, NgxUiLoaderModule, SPINNER } from 'ngx-ui-loader';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { DashboardModule } from "./components/dashboard/dashboard.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -39,7 +38,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     PageNotFoundComponent,
     ConfirmDialogComponent,
     ChangePasswordComponent,
-    FooterComponent
+    FooterComponent,
   ],
 
   imports: [
@@ -53,12 +52,12 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     PaginationModule.forRoot(),
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     ToastrModule.forRoot(),
-    NgbModule
+    NgbModule,
   ],
 
   providers: [
-    // HttpClientModule,
-    // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    HttpClientModule,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })

@@ -49,19 +49,14 @@ export class LoginComponent implements OnInit {
       this.ngxService.stop();
       this.responseMessage = res?.message;
       this.notificationService.showSuccess("Successfully logged in", 'SUCCESS');
-      localStorage.setItem('token', res.token);
 
-      // let token = localStorage.getItem('token');
-      // let decodedJWT = JSON.parse(window.atob(token!.split('.')[1]));
-
-      // this.role = decodedJWT.role;
-      // console.log('Inside login - role: ', this.role);
-
-      // console.log('login - role: ' + decodedJWT.role);
-
-      // if (this.role === 'admin') {
-      // }
-      this.router.navigate(['/dashboard']);
+      if (this.authService.userValue && this.authService.getUserRole() === 'ADMIN') {
+        this.router.navigate(['/admin-dashboard'])
+      } else if (this.authService.userValue && this.authService.getUserRole() === 'USER') {
+        this.router.navigate(['/user-dashboard'])
+      } else {
+        this.notificationService.showError("Failed to login", "ERROR");
+      }
 
 
     }, (error) => {

@@ -38,8 +38,8 @@ export class AuthService {
     }
   }
 
-  signup(user: any): Observable<any> {
-    return this.http.post(this.apiUrl + "/register", user);
+  signup(user: User): Observable<User> {
+    return this.http.post(this.apiUrl + '/register', user);
   }
 
   login(data: User): Observable<any> {
@@ -82,7 +82,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
-    localStorage.clear();
+    localStorage.removeItem('user');
     this.currentUserSource.next(null);
     this.router.navigate(['/']);
   }

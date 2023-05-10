@@ -32,7 +32,7 @@ export class SignupComponent implements OnInit {
   private _initSignupForm() {
     this.signUpForm = this.fb.group({
       myUsername: ['', Validators.required],
-      phoneNo: ['', Validators.required],
+      phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
@@ -44,10 +44,12 @@ export class SignupComponent implements OnInit {
 
     const user: User = {
       myUsername: this.signUpFormError['myUsername'].value,
-      phoneNo: this.signUpFormError['phoneNo'].value,
+      phone: this.signUpFormError['phone'].value,
       email: this.signUpFormError['email'].value,
       password: this.signUpFormError['password'].value,
     }
+
+    console.log('inside-signup: ', user);
 
     this.authService.signup(user).subscribe((res: any) => {
       this.ngxService.stop();

@@ -1,6 +1,6 @@
 export class User {
     myUsername?: string;
-    phoneNo?: string;
+    phone?: string;
     email?: string;
     password?: string;
 }

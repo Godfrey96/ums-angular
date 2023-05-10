@@ -1,12 +1,12 @@
-<aside id="sidebar" class="sidebar">
+<aside id="sidebar" class="sidebar" *ngIf="user">
   <ul class="sidebar-nav" id="sidebar-nav">
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/dashboard">
+    <li class="nav-item" *ngIf="this.authService.getUserRole() === 'ADMIN'">
+      <a class="nav-link" routerLink="/admin-dashboard">
         <i class="bi bi-grid"></i> <span>Dashboard</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/dashboard">
+      <a class="nav-link" routerLink="/all-users">
         <i class="bi bi-people"></i> <span>All Users</span>
       </a>
     </li>
