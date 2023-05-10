@@ -39,12 +39,16 @@ export class AuthGuard implements CanActivate {
       }
     }
 
-    if (tokenPayLoad.role == 'user' || tokenPayLoad.role == 'admin') {
+    if (tokenPayLoad.role == 'USER' || tokenPayLoad.role == 'ADMIN') {
       if (this.authService.isAuthenticated() && tokenPayLoad.role == expectedRole) {
         return true;
       }
       this.notificationService.showError("You are not authorized", "UNAUTHORIZED");
-      this.router.navigate(['/dashboard']);
+      // if (tokenPayLoad.role == 'USER') {
+      //   this.router.navigate(['/user-dashboard']);
+      // } else {
+      //   this.router.navigate(['/admin-dashboard']);
+      // }
       return false;
     } else {
       this.router.navigate(['']);
