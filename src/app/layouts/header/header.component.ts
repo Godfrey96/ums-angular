@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 export class HeaderComponent implements OnInit {
 
   user!: User;
+  currentLoggedInUser!: User;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -29,6 +30,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this._getCurrentUser();
+    this.currentLoggedInUser = this.authService.getUser().user;
+    console.log('getUser(): ', this.currentLoggedInUser.myUsername)
   }
 
   _getCurrentUser() {
@@ -40,40 +43,37 @@ export class HeaderComponent implements OnInit {
     this.document.body.classList.toggle('toggle-sidebar');
   }
 
-  logout() {
-    this.confirmDialogService.confirm('Logout?', 'Are you sure you want want to logout?').then((confirmed: any) => {
-      this.ngxService.start();
-      this.authService.logout();
-      this.notificationService.showSuccess("Successfully logged out", "SUCCESS");
-      this.ngxService.stop();
-    }).catch(() => {
-      this.ngxService.stop();
-      // this.notificationService.showError("Could not log out", "FAILURE");
-    });
-  }
-
   // logout() {
-  //   Swal.fire({
-  //     title: 'Are you sure?',
-  //     text: 'You are about to logout.',
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonText: 'Yes.',
-  //     cancelButtonText: 'No',
-  //   }).then((result) => {
+  //   this.confirmDialogService.confirm('Logout?', 'Are you sure you want want to logout?').then((confirmed: any) => {
   //     this.ngxService.start();
-  //     // this.authService.logout();
-  //     localStorage.removeItem('token');
-  //     localStorage.removeItem('user');
-  //     this.router.navigate(['/']);
-  //     if (result.value) {
-  //       Swal.fire('Logout!', 'You are logout successfully.', 'success');
-  //       this.ngxService.stop();
-  //     } else if (result.dismiss === Swal.DismissReason.cancel) {
-  //       this.ngxService.stop();
-  //       Swal.fire('Cancelled', 'You are not logout.)', 'error');
-  //     }
+  //     this.authService.logout();
+  //     this.notificationService.showSuccess("Successfully logged out", "SUCCESS");
+  //     this.ngxService.stop();
+  //   }).catch(() => {
+  //     this.ngxService.stop();
+  //     // this.notificationService.showError("Could not log out", "FAILURE");
   //   });
   // }
+
+  logout() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to logout.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes.',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      this.ngxService.start();
+      if (result.value) {
+        Swal.fire('Logout!', 'You are logout successfully.', 'success');
+        this.authService.logout();
+        this.ngxService.stop();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.ngxService.stop();
+        Swal.fire('Cancelled', 'You are not logout.)', 'error');
+      }
+    });
+  }
 }
 

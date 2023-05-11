@@ -18,6 +18,8 @@ import { TokenInterceptor } from './guards/token.interceptor';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
+import { AuthGuard } from './guards/auth.guard';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: "Loading...",
@@ -39,6 +41,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ConfirmDialogComponent,
     ChangePasswordComponent,
     FooterComponent,
+    ForbiddenComponent,
   ],
 
   imports: [
@@ -57,6 +60,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 
   providers: [
     HttpClientModule,
+    AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
