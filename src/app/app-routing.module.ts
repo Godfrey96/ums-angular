@@ -7,6 +7,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { AdminGuard } from './guards/admin.guard';
 import { UserGuard } from './guards/user.guard';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 
 
 const routes: Routes = [
@@ -32,20 +33,20 @@ const routes: Routes = [
   // { path: '', component: AdminDashboardComponent },
   {
     canActivate: [AuthGuard],
-    data: { expectedRole: 'ADMIN' },
+    data: { roles: 'ADMIN' },
     path: 'admin-dashboard',
     loadChildren: () => import('./pages/admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)
   },
   {
     canActivate: [AuthGuard],
-    data: { expectedRole: 'USER' },
+    data: { roles: 'USER' },
     path: 'user-dashboard',
     loadChildren: () => import('./pages/user-dashboard/user-dashboard.module').then(m => m.UserDashboardModule)
   },
   {
     canActivate: [AuthGuard],
     data: {
-      expectedRole: ['ADMIN', 'USER']
+      roles: ['ADMIN', 'USER']
     },
     path: 'user-profile',
     loadChildren: () => import('./pages/user-profile/user-profile.module').then(m => m.UserProfileModule)
@@ -53,12 +54,13 @@ const routes: Routes = [
   {
     canActivate: [AuthGuard],
     data: {
-      expectedRole: ['ADMIN', 'USER']
+      roles: ['ADMIN']
     },
     path: 'all-users',
     loadChildren: () => import('./pages/all-users/all-users.module').then(m => m.AllUsersModule)
   },
   { path: '**', component: PageNotFoundComponent },
+  { path: 'forbidden', component: ForbiddenComponent },
   { path: 'login', loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule) },
 ];
 
