@@ -13,7 +13,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { TokenInterceptor } from './guards/token.interceptor';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { HeaderComponent } from './layouts/header/header.component';
@@ -39,7 +38,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     SidebarComponent,
     PageNotFoundComponent,
     ConfirmDialogComponent,
-    ChangePasswordComponent,
     FooterComponent,
     ForbiddenComponent,
   ],

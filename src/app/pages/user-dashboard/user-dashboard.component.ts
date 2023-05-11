@@ -27,11 +27,8 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.authService.userValue.token
-    this.user = this.authService.userValue.user
-    console.log('ooo: ', this.user)
-    console.log('ppp: ', this.authService.userValue.token)
-    console.log('zzz: ', this.authService.userValue)
+    this.authService.userValue
+    this.user = this.authService.userValue
     this._getAllUsersOnly();
   }
 

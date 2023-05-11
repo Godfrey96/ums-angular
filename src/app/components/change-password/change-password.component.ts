@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-change-password',
@@ -18,7 +19,8 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    // private authService: AuthService,
+    private userService: UserService,
     private router: Router,
     private notificationService: NotificationService,
     private ngxService: NgxUiLoaderService
@@ -56,7 +58,7 @@ export class ChangePasswordComponent implements OnInit {
       confirmPassword: this.changePasswordFormError['confirmPassword'].value,
     }
 
-    this.authService.changePassword(data).subscribe((res: any) => {
+    this.userService.changePassword(data).subscribe((res: any) => {
       console.log("data-user: ", res)
       this.ngxService.stop();
       this.responseMessage = res?.message;

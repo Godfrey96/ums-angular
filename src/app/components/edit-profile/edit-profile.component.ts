@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Observable, tap } from 'rxjs';
 import { User } from 'src/app/model/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -13,9 +14,11 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class EditProfileComponent implements OnInit {
 
+  user$!: Observable<User>;
   editForm!: FormGroup;
   isSubmitted = false;
   responseMessage!: any;
+  currentLoggedInUser!: User;
 
   constructor(
     private authService: AuthService,
@@ -26,6 +29,8 @@ export class EditProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.currentLoggedInUser = this.authService.getUser().user;
+
     this._editForm();
   }
 
@@ -52,6 +57,7 @@ export class EditProfileComponent implements OnInit {
       this.responseMessage = res?.message;
       this.notificationService.showSuccess(this.responseMessage, 'SUCCESS');
     }, (error) => {
+      this.ngxService.stop();
       if (error.error?.message) {
         this.responseMessage = error.error?.message;
       } else {

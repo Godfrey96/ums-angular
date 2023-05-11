@@ -57,9 +57,6 @@ export class AuthService {
       );
   }
 
-  changePassword(data: any) {
-    return this.http.post(this.apiUrl + "/changePassword", data);
-  }
 
   checkToken() {
     return this.http.get(this.apiUrl + "/checkToken");
