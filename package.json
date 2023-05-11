@@ -24,6 +24,7 @@
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.3.0-alpha3",
     "jwt-decode": "^3.1.2",
+    "ng-swagger-gen": "^2.3.1",
     "ngx-bootstrap": "^10.2.0",
     "ngx-toastr": "^16.1.1",
     "ngx-ui-loader": "^13.0.0",

@@ -20,10 +20,15 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadScript();
-    this.checkToken();
     this._getCurrentUser();
-    console.log('inside app-: ', this.user)
-    console.log('inside role-: ', this.authService.getUserRole())
+
+    if (this.authService.getUserRole() === 'ADMIN') {
+      this.router.navigate(['/admin-dashboard'])
+    } else if (this.authService.getUserRole() === 'USER') {
+      this.router.navigate(['/user-dashboard'])
+    } else {
+      this.router.navigate(['/login'])
+    }
   }
 
   loadScript() {
@@ -35,16 +40,6 @@ export class AppComponent implements OnInit {
 
   _getCurrentUser() {
     this.authService.currentUser$.subscribe(x => this.user = x);
-  }
-
-
-  checkToken() {
-    this.authService.checkToken().subscribe((res: any) => {
-      console.log('res: ', res);
-      this.router.navigate(['/dashboard']);
-    }, (error: any) => {
-      console.log(error);
-    })
   }
 
 }

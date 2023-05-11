@@ -56,8 +56,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/user-dashboard'])
       } else {
         this.notificationService.showError("Failed to login", "ERROR");
+        this.router.navigate(['/login'])
       }
-
 
     }, (error) => {
       this.ngxService.stop();

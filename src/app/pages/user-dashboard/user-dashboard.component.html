@@ -25,23 +25,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mogau</td>
-                  <td>mogau@gmail.com</td>
-                  <td>0123456789</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Mogau</td>
-                  <td>mogau@gmail.com</td>
-                  <td>0123456789</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Mogau</td>
-                  <td>mogau@gmail.com</td>
-                  <td>0123456789</td>
+                <tr *ngFor="let users of allUsers; let i = index">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ users.myUsername }}</td>
+                  <td>{{ users.email }}</td>
+                  <td>{{ users.phone }}</td>
                 </tr>
               </tbody>
             </table>
