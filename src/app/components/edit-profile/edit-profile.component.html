@@ -1,4 +1,4 @@
-<form [formGroup]="editForm">
+<form>
   <!-- <div class="row mb-3">
       <label
         for="profileImage"
@@ -24,17 +24,16 @@
       </div>
     </div> -->
   <div class="row mb-3">
-    <label for="fullName" class="col-md-4 col-lg-3 col-form-label"
+    <label for="myUsername" class="col-md-4 col-lg-3 col-form-label"
       >Username</label
     >
     <div class="col-md-8 col-lg-9">
       <input
-        name="fullName"
+        name="myUsername"
         type="text"
         class="form-control"
-        id="fullName"
-        formControlName="myUsername"
-        value="Jassa"
+        id="myUsername"
+        [(ngModel)]="currentLoggedInUser.myUsername"
       />
     </div>
   </div>
@@ -46,8 +45,7 @@
         type="text"
         class="form-control"
         id="Phone"
-        formControlName="phone"
-        value="(436) 486-3538 x29071"
+        [(ngModel)]="this.currentLoggedInUser.phone"
       />
     </div>
   </div>
@@ -59,8 +57,7 @@
         type="email"
         class="form-control"
         id="Email"
-        formControlName="email"
-        value="k.anderson@example.com"
+        [(ngModel)]="currentLoggedInUser.email"
       />
     </div>
   </div>

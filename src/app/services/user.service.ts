@@ -27,6 +27,10 @@ export class UserService {
     return this.http.post(this.apiUrl + "/update-user", user);
   }
 
+  changePassword(data: any) {
+    return this.http.post(this.apiUrl + "/change-password", data);
+  }
+
   public roleMatch(allowedRoles: string): any {
     let isMatch = false;
     const userRoles: any = this.authService.getUserRole();

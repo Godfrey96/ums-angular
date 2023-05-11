@@ -7,13 +7,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserProfileComponent } from './user-profile.component';
 import { OverviewComponent } from 'src/app/components/overview/overview.component';
 import { EditProfileComponent } from 'src/app/components/edit-profile/edit-profile.component';
+import { ChangePasswordComponent } from 'src/app/components/change-password/change-password.component';
 
 
 @NgModule({
   declarations: [
     UserProfileComponent,
     OverviewComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
