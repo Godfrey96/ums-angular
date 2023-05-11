@@ -1,27 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
-import { ShellComponent } from './shared/shell/shell.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { AuthGuard } from './guards/auth.guard';
-import { ChangePasswordComponent } from './components/change-password/change-password.component';
-import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
-import { AdminGuard } from './guards/admin.guard';
-import { UserGuard } from './guards/user.guard';
+
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   component: ShellComponent,
-  //   // canActivate: [AuthGuard],
-  //   // data: {
-  //   //   expectedRole: ['admin', 'user']
-  //   // },
-  //   children: [
-  //     { path: 'dashboard', loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule) },
-  //   ]
-  // },
   // {
   //   path: 'change-password',
   //   // canActivate: [AuthGuard],

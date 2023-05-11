@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  apiUrl = environment.apiUrl + "/users";
+  apiUrl = environment.apiUrl + "/user";
 
   constructor(
     private http: HttpClient,
@@ -19,7 +20,11 @@ export class UserService {
   }
 
   getAllUsers() {
-    return this.http.get(this.apiUrl + "/get");
+    return this.http.get(this.apiUrl + "/get-users-only");
+  }
+
+  updateUser(user: User) {
+    return this.http.post(this.apiUrl + "/update-user", user);
   }
 
   public roleMatch(allowedRoles: string): any {
