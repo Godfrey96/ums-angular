@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class HeaderComponent implements OnInit {
 
-  user!: User;
+  user!: Partial<User> | undefined;
   currentLoggedInUser!: User;
 
   constructor(
@@ -34,25 +34,13 @@ export class HeaderComponent implements OnInit {
   }
 
   _getCurrentUser() {
-    this.authService.currentUser$.subscribe(x => this.user = x);
+    this.authService.currentUser$.subscribe(x => this.user = x.user);
   }
 
   sidebarToggle() {
     //toggle sidebar function
     this.document.body.classList.toggle('toggle-sidebar');
   }
-
-  // logout() {
-  //   this.confirmDialogService.confirm('Logout?', 'Are you sure you want want to logout?').then((confirmed: any) => {
-  //     this.ngxService.start();
-  //     this.authService.logout();
-  //     this.notificationService.showSuccess("Successfully logged out", "SUCCESS");
-  //     this.ngxService.stop();
-  //   }).catch(() => {
-  //     this.ngxService.stop();
-  //     // this.notificationService.showError("Could not log out", "FAILURE");
-  //   });
-  // }
 
   logout() {
     Swal.fire({

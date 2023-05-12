@@ -9,8 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SidebarComponent {
 
-  user!: User;
-  userRole!: any;
+  user!: Partial<User> | undefined;
+  userRole!: string;
 
   constructor(public authService: AuthService) { }
 
@@ -22,7 +22,7 @@ export class SidebarComponent {
   }
 
   _getCurrentUser() {
-    this.authService.currentUser$.subscribe(x => this.user = x);
+    this.authService.currentUser$.subscribe(x => this.user = x.user);
   }
 
   _getUserRole() {

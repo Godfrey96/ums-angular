@@ -12,31 +12,26 @@ import { JwtResponse } from '../model/jwt-response';
 export class AuthService {
 
   apiUrl = environment.apiUrl + "/auth";
-  private currentUserSource: BehaviorSubject<any>;
-  public currentUser$!: Observable<any>
+  private currentUserSource: BehaviorSubject<Partial<JwtResponse>>;
+  public currentUser$!: Observable<Partial<JwtResponse>>
 
   constructor(
     private http: HttpClient,
     private router: Router
   ) {
-    this.currentUserSource = new BehaviorSubject<any>(localStorage.getItem('token'));
+    this.currentUserSource = new BehaviorSubject<Partial<JwtResponse>>(
+      {token: localStorage.getItem('token') ||'',
+      user: JSON.parse(localStorage.getItem('user') || '{}').user
+    }
+    );
     this.currentUser$ = this.currentUserSource.asObservable();
 
   }
 
-  public get userValue(): JwtResponse {
+  public get userValue(): Partial<JwtResponse> {
     return this.currentUserSource.value;
   }
 
-  public isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      this.router.navigate(['/']);
-      return false;
-    } else {
-      return true;
-    }
-  }
 
   signup(user: User): Observable<User> {
     return this.http.post(this.apiUrl + '/register', user);
@@ -58,10 +53,6 @@ export class AuthService {
   }
 
 
-  checkToken() {
-    return this.http.get(this.apiUrl + "/checkToken");
-  }
-
   getUser() {
     let user = localStorage.getItem('user');
     if (user != null) {
@@ -80,7 +71,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.currentUserSource.next(null);
+    this.currentUserSource.next({});
     this.router.navigate(['/login']);
   }
 

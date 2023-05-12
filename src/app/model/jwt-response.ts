@@ -1,6 +1,6 @@
 import { User } from "./user.model";
 
 export class JwtResponse {
-    user!: any;
+    user!: User;
     token!: string;
 }

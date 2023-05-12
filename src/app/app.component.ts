@@ -10,7 +10,7 @@ import { User } from './model/user.model';
 })
 export class AppComponent implements OnInit {
 
-  user!: User;
+  user!: Partial<User> | undefined;
 
   constructor(
     private elementRef: ElementRef,
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
   }
 
   _getCurrentUser() {
-    this.authService.currentUser$.subscribe(x => this.user = x);
+    this.authService.currentUser$.subscribe(x => this.user = x.user);
   }
 
 }

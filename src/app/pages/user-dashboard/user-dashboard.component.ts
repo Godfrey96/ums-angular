@@ -16,7 +16,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
 
   allUsers!: User[];
   responseMessage!: any;
-  user!: JwtResponse;
+  user!: Partial<JwtResponse>;
   endsub$: Subject<any> = new Subject();
 
   constructor(
