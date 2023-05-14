@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
@@ -28,13 +28,15 @@ export class UserService {
   }
 
   changePassword(data: any) {
-    return this.http.post(this.apiUrl + "/change-password", data);
+    return this.http.post(this.apiUrl + "/change-password", data, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
   }
 
   public roleMatch(allowedRoles: string): any {
     let isMatch = false;
     const userRoles: any = this.authService.getUserRole();
-    console.log('userRoles: ', userRoles)
+    // console.log('userRoles: ', userRoles)
 
     if (userRoles === 'ADMIN' || userRoles === 'USER') {
       isMatch = true;

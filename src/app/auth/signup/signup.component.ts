@@ -54,7 +54,7 @@ export class SignupComponent implements OnInit {
     this.authService.signup(user).subscribe((res: any) => {
       this.ngxService.stop();
       this.responseMessage = res?.message;
-      this.notificationService.showSuccess(this.responseMessage, 'SUCCESS');
+      this.notificationService.showSuccess("Sign up successfully", 'SUCCESS');
       this.router.navigate(['/login']);
     }, (error) => {
       this.ngxService.stop();
