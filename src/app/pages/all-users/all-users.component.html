@@ -1,13 +1,7 @@
 <main id="main" class="main">
   <div class="pagetitle">
-    <h1>Data Tables</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-        <li class="breadcrumb-item">Tables</li>
-        <li class="breadcrumb-item active">Data</li>
-      </ol>
-    </nav>
+    <h1>All Users</h1>
+
   </div>
   <section class="section">
     <div class="row">
@@ -28,49 +22,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mogau</td>
-                  <td>mogau@gmail.com</td>
-                  <td>0123456789</td>
-                  <td>Active</td>
-                  <td>Admin</td>
+                <tr *ngFor="let users of allUsers; let i = index">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ users.myUsername }}</td>
+                  <td>{{ users.email }}</td>
+                  <td>+27{{ users.phone }}</td>
+                  <td>{{ users.status }}</td>
+                  <td>{{ users.role }}</td>
                   <td>
                     <button class="btn btn-outline-success mr-2">Edit</button>
                     <button class="btn btn-outline-primary mr-2">
                       Deactivate
                     </button>
-                    <button class="btn btn-outline-danger">Delete</button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Mogau</td>
-                  <td>mogau@gmail.com</td>
-                  <td>0123456789</td>
-                  <td>Active</td>
-                  <td>User</td>
-                  <td>
-                    <button class="btn btn-outline-success mr-2">Edit</button>
-                    <button class="btn btn-outline-primary mr-2">
-                      Deactivate
-                    </button>
-                    <button class="btn btn-outline-danger">Delete</button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Mogau</td>
-                  <td>mogau@gmail.com</td>
-                  <td>0123456789</td>
-                  <td>Deactive</td>
-                  <td>User</td>
-                  <td>
-                    <button class="btn btn-outline-success mr-2">Edit</button>
-                    <button class="btn btn-outline-primary mr-2">
-                      Activate
-                    </button>
-                    <button class="btn btn-outline-danger">Delete</button>
+                    <button (click)="onDeleteUser(users.id)" class="btn btn-outline-danger">Delete</button>
                   </td>
                 </tr>
               </tbody>
@@ -81,3 +45,4 @@
     </div>
   </section>
 </main>
+
