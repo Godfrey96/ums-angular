@@ -17,7 +17,7 @@ export class UserService {
   ) { }
 
   getAllUsersAndAdmins() {
-    return this.http.get(this.apiUrl + "/get-all");
+    return this.http.get(this.apiUrl + "/get-all-users");
   }
 
   getAllUsers() {
@@ -30,6 +30,10 @@ export class UserService {
 
   updateUser(user: User) {
     return this.http.post(this.apiUrl + "/update-user", user);
+  }
+
+  deleteUser(userId: number) {
+    return this.http.delete(this.apiUrl + "/delete/" + userId);
   }
 
   changePassword(data: any) :Observable<string> {
