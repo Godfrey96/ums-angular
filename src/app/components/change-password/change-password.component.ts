@@ -20,8 +20,8 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    // private authService: AuthService,
-    private userService: UserService,
+    private authService: AuthService,
+    // private userService: UserService,
     private router: Router,
     private notificationService: NotificationService,
     private ngxService: NgxUiLoaderService
@@ -53,21 +53,24 @@ export class ChangePasswordComponent implements OnInit {
     this.ngxService.start();
     this.isSubmitted = true;
 
-    const data: any = {
+    const data = {
       oldPassword: this.changePasswordFormError['oldPassword'].value,
       newPassword: this.changePasswordFormError['newPassword'].value,
       confirmPassword: this.changePasswordFormError['confirmPassword'].value,
     }
 
-    console.log("data-password: ", data);
-
-    this.userService.changePassword(data).subscribe((res: any) => {
-      console.log("data-user: ", res)
+    this.authService.changePassword(data).subscribe((res: string) => {
+      if (!res) return;
       this.ngxService.stop();
-      this.responseMessage = res?.message;
+      this.responseMessage = res;
       this.notificationService.showSuccess("Password changed successfully", 'SUCCESS');
     }, (error) => {
       this.ngxService.stop();
+      if (error.status === 200) {
+        this.notificationService.showSuccess("Password changed successfully", 'SUCCESS');
+        this.changePasswordForm.reset();
+        return;
+      }
       if (error.error?.message) {
         this.responseMessage = error.error?.message;
       } else {
@@ -78,6 +81,34 @@ export class ChangePasswordComponent implements OnInit {
       this.notificationService.showError("Failed to change password", "ERROR");
     })
   }
+
+
+  // changePassword(data: {oldPassword: string; newPassword: string, confirmPassword: string}) {
+  //   this.userService.changePassword(data).subscribe({
+  //     next: (res: string) => {
+  //       if (!res) return;
+  //       console.log("data-user: ", res)
+  //       this.ngxService.stop();
+  //       this.responseMessage = res;
+  //       this.notificationService.showSuccess("Password changed successfully", 'SUCCESS');
+  //     },
+  //     error: (error) => {
+  //       this.ngxService.stop();
+  //       if (error.status === 200) {
+  //         this.notificationService.showSuccess("Password changed successfully", 'SUCCESS');
+  //         return;
+  //       }
+  //       if (error.error?.message) {
+  //         this.responseMessage = error.error?.message;
+  //       } else {
+  //         console.log("data-error: ", error)
+  //         this.responseMessage = this.notificationService.showError("Something went wrong", "BAD REQUEST");
+  //       }
+  //       console.log("ERROR: ", error)
+  //       this.notificationService.showError("Failed to change password", "ERROR");
+  //     }
+  //   })
+  // }
 
   // errors
   get changePasswordFormError() {

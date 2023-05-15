@@ -1,16 +1,9 @@
 <main id="main" class="main">
   <div class="pagetitle">
-    <h1>Data Tables</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-        <li class="breadcrumb-item">Tables</li>
-        <li class="breadcrumb-item active">Data</li>
-      </ol>
-    </nav>
+    <h1>All Users</h1>
   </div>
-  <section class="section">
-    <div class="row">
+  <section class="section mt-5">
+    <!-- <div class="row">
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
@@ -36,6 +29,29 @@
           </div>
         </div>
       </div>
+    </div> -->
+
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div *ngFor="let users of allUsers" class="col-md-6 col-xl-3">
+           <div class="card m-b-30">
+              <div class="card-body row">
+                 <!-- <div class="col-6">
+                    <a href=""><img src="{{employee?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a>
+                 </div> -->
+                 <div class="col-6 card-title align-self-center mb-0">
+                    <h5>{{ users.myUsername}}</h5>
+                 </div>
+              </div>
+              <ul class="list-group list-group-flush">
+                 <li class="list-group-item"><i class="bi bi-envelope-fill float-right"></i>{{ users.email}}</li>
+                 <li class="list-group-item"><i class="bi bi-telephone-fill float-right"></i>Phone : +27{{ users.phone}}</li>
+              </ul>
+           </div>
+        </div>
+      </div>
     </div>
+
   </section>
 </main>

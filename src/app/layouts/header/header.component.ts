@@ -6,6 +6,7 @@ import { User } from 'src/app/model/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmDialogService } from 'src/app/services/confirm-dialog.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -21,16 +22,17 @@ export class HeaderComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private authService: AuthService,
+    private userService: UserService,
     private ngxService: NgxUiLoaderService,
-    private confirmDialogService: ConfirmDialogService,
-    private notificationService: NotificationService,
-    private router: Router
   ) { }
 
 
   ngOnInit(): void {
     this._getCurrentUser();
-    this.currentLoggedInUser = this.authService.getUser().user;
+
+    this.userService.getCurrentUser().subscribe((user)=>{
+      this.currentLoggedInUser = user
+    })
   }
 
   _getCurrentUser() {
