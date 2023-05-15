@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { User } from '../model/user.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,14 +24,16 @@ export class UserService {
     return this.http.get(this.apiUrl + "/get-users-only");
   }
 
+  getCurrentUser() {
+    return this.http.get(this.apiUrl + "/get-user");
+  }
+
   updateUser(user: User) {
     return this.http.post(this.apiUrl + "/update-user", user);
   }
 
-  changePassword(data: any) {
-    return this.http.post(this.apiUrl + "/change-password", data, {
-      headers: new HttpHeaders().set('Content-Type', 'application/json')
-    });
+  changePassword(data: any) :Observable<string> {
+    return this.http.post<string>(this.apiUrl + "/change-password", data);
   }
 
   public roleMatch(allowedRoles: string): any {

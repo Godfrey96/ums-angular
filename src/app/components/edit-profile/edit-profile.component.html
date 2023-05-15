@@ -1,5 +1,5 @@
-<form>
-  <!-- <div class="row mb-3">
+<form [formGroup]="editForm">
+  <div class="row mb-3">
       <label
         for="profileImage"
         class="col-md-4 col-lg-3 col-form-label"
@@ -22,7 +22,7 @@
           ></a>
         </div>
       </div>
-    </div> -->
+    </div>
   <div class="row mb-3">
     <label for="myUsername" class="col-md-4 col-lg-3 col-form-label"
       >Username</label
@@ -33,7 +33,7 @@
         type="text"
         class="form-control"
         id="myUsername"
-        [(ngModel)]="currentLoggedInUser.myUsername"
+       formControlName="myUsername"
       />
     </div>
   </div>
@@ -45,7 +45,7 @@
         type="text"
         class="form-control"
         id="Phone"
-        [(ngModel)]="this.currentLoggedInUser.phone"
+        formControlName="phone"
       />
     </div>
   </div>
@@ -57,7 +57,7 @@
         type="email"
         class="form-control"
         id="Email"
-        [(ngModel)]="currentLoggedInUser.email"
+        formControlName="email"
       />
     </div>
   </div>

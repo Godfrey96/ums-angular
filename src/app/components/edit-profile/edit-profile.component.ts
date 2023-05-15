@@ -40,6 +40,17 @@ export class EditProfileComponent implements OnInit {
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
     })
+
+   this._populateCurrentUserEditForm();
+  }
+
+  _populateCurrentUserEditForm() {
+    this.userService.getCurrentUser().subscribe((res: User)=> {
+      this.editFormError['myUsername'].setValue(res.myUsername)
+      this.editFormError['phone'].setValue(res.phone)
+      this.editFormError['email'].setValue(res.email)
+    })
+
   }
 
   onSubmit() {
@@ -53,11 +64,16 @@ export class EditProfileComponent implements OnInit {
     }
 
     this.userService.updateUser(user).subscribe((res: any) => {
+      console.log('res-: ', res.data)
       this.ngxService.stop();
       this.responseMessage = res?.message;
       this.notificationService.showSuccess(this.responseMessage, 'SUCCESS');
     }, (error) => {
       this.ngxService.stop();
+      if (error.status === 200) {
+        this.notificationService.showSuccess("User updated successfully", 'SUCCESS');
+        return;
+      }
       if (error.error?.message) {
         this.responseMessage = error.error?.message;
       } else {

@@ -52,6 +52,10 @@ export class AuthService {
       );
   }
 
+  changePassword(data: any) :Observable<string> {
+    return this.http.post<string>(this.apiUrl + "/change-password", data);
+  }
+
 
   getUser() {
     let user = localStorage.getItem('user');
