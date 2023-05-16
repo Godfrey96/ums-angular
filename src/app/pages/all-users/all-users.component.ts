@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   templateUrl: './all-users.component.html',
   styleUrls: ['./all-users.component.css']
 })
-export class AllUsersComponent  implements OnInit, OnDestroy {
+export class AllUsersComponent implements OnInit, OnDestroy {
 
   allUsers!: User[];
   responseMessage!: any;
@@ -64,22 +64,49 @@ export class AllUsersComponent  implements OnInit, OnDestroy {
       confirmButtonText: 'Yes.',
       cancelButtonText: 'No',
       confirmButtonColor: '#3085d6',
-    }).then((result)=>{
+    }).then((result) => {
       this.ngxService.start();
-      if(result.value){
+      if (result.value) {
         Swal.fire('Delete!', 'User deleted successfully.', 'success');
-        this.userService.deleteUser(userId).subscribe((res) => {
-          console.log('res-deleted', res)
-          this.ngxService.stop();
-          this._getAllUsersOnly();
-          // this.router.navigate(['/all-users'])
+        this.userService.deleteUser(userId).subscribe({
+          next: () => {
+            this.ngxService.stop();
+            this._getAllUsersOnly();
+          },
+          error: (error) => {
+            this.ngxService.stop();
+            if (error.status === 200) {
+              this.notificationService.showSuccess("User updated successfully", 'SUCCESS');
+              this._getAllUsersOnly();
+              return;
+            }
+            // Swal.fire('Cancelled', 'Error while deleting user.', 'error');
+          }
         })
+        // this.userService.deleteUser(userId).subscribe((res) => {
+        //   console.log('res-deleted', res)
+        //   this.ngxService.stop();
+        //   this._getAllUsersOnly();
+        //   // this.router.navigate(['/all-users'])
+        // }, (error) => {
+        //   this.ngxService.stop();
+        //   if (error.status === 200) {
+        //     this.notificationService.showSuccess("User updated successfully", 'SUCCESS');
+        //     this._getAllUsersOnly();
+        //     return;
+        //   }
+        // })
         this.ngxService.stop();
-      } else if(result.dismiss === Swal.DismissReason.cancel) {
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
         this.ngxService.stop();
         Swal.fire('Cancelled', 'User not deleted.', 'error');
       }
     })
+  }
+
+  onUpdateUserStatus(status: any, id: number) {
+    console.log('status: ', status)
+    console.log('id: ', id)
   }
 
   ngOnDestroy() {
