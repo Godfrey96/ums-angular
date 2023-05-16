@@ -15,9 +15,11 @@
                   <th scope="col">Username</th>
                   <th scope="col">Email</th>
                   <th scope="col">Phone</th>
-                  <th scope="col">Status</th>
                   <th scope="col">Role</th>
-                  <th scope="col">Actions</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Activate/ Deactivate</th>
+                  <th scope="col">Update</th>
+                  <th scope="col">Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -26,23 +28,29 @@
                   <td>{{ users.myUsername }}</td>
                   <td>{{ users.email }}</td>
                   <td>+27{{ users.phone }}</td>
-                  <td>{{ users.status }}</td>
                   <td>{{ users.role }}</td>
+                  <td *ngIf="users.status === 'true'">Active</td>
+                  <td *ngIf="users.status === 'false'">Deactive</td>
                   <td>
-                    <button class="btn btn-outline-success mr-2">Edit</button>
-                    <button
-                      (change)="onUpdateUserStatus(users.status, users.id)"
-                      class="btn btn-outline-primary mr-2"
-                    >
-                      Deactivate
-                    </button>
-                    <button
-                      (click)="onDeleteUser(users.id)"
-                      class="btn btn-outline-danger"
-                    >
-                      Delete
+                    <div class="form-check form-switch">
+                      <input (change)="onUpdateUserStatus($event, users.id)" class="form-check-input" type="checkbox"
+                        [checked]="users.status === 'false'" role="switch" id="flexSwitchCheckDefault" />
+                      <input (change)="onUpdateUserStatus($event, users.id)" class="form-check-input" type="checkbox"
+                        [checked]="users.status === 'true'" role="switch" id="flexSwitchCheckDefault" />
+                    </div>
+                  </td>
+                  <td>
+                    <button (click)="onUpdateUser(users.id)" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                      data-bs-target="#basicModal">
+                      <i class="bi bi-pencil"></i>
                     </button>
                   </td>
+                  <td>
+                    <button (click)="onDeleteUser(users.id)" class="btn btn-danger btn-sm">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
@@ -52,3 +60,40 @@
     </div>
   </section>
 </main>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="basicModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" class="form-control" id="username" aria-describedby="emailHelp"
+              placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" name="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" data-dismiss="modal" class="btn btn-outline-primary">
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

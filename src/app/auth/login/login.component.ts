@@ -45,6 +45,12 @@ export class LoginComponent implements OnInit {
       password: this.loginFormError['password'].value,
     }
 
+    if(data != null){
+      console.log("valied")
+    } else {
+      console.log("not valied")
+    }
+
     this.authService.login(data).subscribe((res: any) => {
       this.ngxService.stop();
       this.responseMessage = res?.message;
@@ -55,18 +61,18 @@ export class LoginComponent implements OnInit {
       } else if (this.authService.userValue && this.authService.getUserRole() === 'USER') {
         this.router.navigate(['/user-dashboard'])
       } else {
-        this.notificationService.showError("Failed to login", "ERROR");
         this.router.navigate(['/login'])
       }
 
     }, (error) => {
       this.ngxService.stop();
-      if (error.error?.message) {
-        this.responseMessage = error.error?.message;
-      } else {
-        this.responseMessage = this.notificationService.showError("Something went wrong", "BAD REQUEST");
+      if (error.status === 401) {
+        this.responseMessage = this.notificationService.showError("You don't have permission to access this page", "UNAUTHORIZED");
+      } else if(error.status === 403) {
+        this.responseMessage = this.notificationService.showError("Your Account is Disabled. Wait for an Admin to activate", "FORBIDDEN");
+      } else if(error.status === 500) {
+        this.responseMessage = this.notificationService.showError("Something went wrong", "INTERNAL SERVER");
       }
-      this.notificationService.showError("Invalid username or password", "ERROR");
     })
   }
 
