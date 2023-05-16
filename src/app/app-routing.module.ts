@@ -7,15 +7,6 @@ import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
-  // {
-  //   path: 'change-password',
-  //   // canActivate: [AuthGuard],
-  //   // data: {
-  //   //   expectedRole: ['admin', 'user']
-  //   // },
-  //   component: ChangePasswordComponent
-  // },
-  // { path: '', component: AdminDashboardComponent },
   {
     canActivate: [AuthGuard],
     data: { roles: 'ADMIN' },

@@ -29,7 +29,7 @@ export class UserService {
   }
 
   updateUserStatus(status: string) {
-    return this.http.put(this.apiUrl + "/update-user", status);
+    return this.http.put(this.apiUrl + "/update-status", status);
   }
 
   updateUser(user: User) {
