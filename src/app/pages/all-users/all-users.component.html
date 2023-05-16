@@ -1,7 +1,6 @@
 <main id="main" class="main">
   <div class="pagetitle">
     <h1>All Users</h1>
-
   </div>
   <section class="section">
     <div class="row">
@@ -31,10 +30,18 @@
                   <td>{{ users.role }}</td>
                   <td>
                     <button class="btn btn-outline-success mr-2">Edit</button>
-                    <button class="btn btn-outline-primary mr-2">
+                    <button
+                      (change)="onUpdateUserStatus(users.status, users.id)"
+                      class="btn btn-outline-primary mr-2"
+                    >
                       Deactivate
                     </button>
-                    <button (click)="onDeleteUser(users.id)" class="btn btn-outline-danger">Delete</button>
+                    <button
+                      (click)="onDeleteUser(users.id)"
+                      class="btn btn-outline-danger"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -45,4 +52,3 @@
     </div>
   </section>
 </main>
-

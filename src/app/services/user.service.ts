@@ -28,6 +28,10 @@ export class UserService {
     return this.http.get(this.apiUrl + "/get-user");
   }
 
+  updateUserStatus(status: string) {
+    return this.http.put(this.apiUrl + "/update-user", status);
+  }
+
   updateUser(user: User) {
     return this.http.post(this.apiUrl + "/update-user", user);
   }
@@ -36,7 +40,7 @@ export class UserService {
     return this.http.delete(this.apiUrl + "/delete/" + userId);
   }
 
-  changePassword(data: any) :Observable<string> {
+  changePassword(data: any): Observable<string> {
     return this.http.post<string>(this.apiUrl + "/change-password", data);
   }
 
