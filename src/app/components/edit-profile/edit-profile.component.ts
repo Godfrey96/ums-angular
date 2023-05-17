@@ -14,7 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class EditProfileComponent implements OnInit {
 
-  user$!: Observable<User>;
+  // user$!: Observable<User>;
   editForm!: FormGroup;
   isSubmitted = false;
   responseMessage!: any;
@@ -41,11 +41,11 @@ export class EditProfileComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
     })
 
-   this._populateCurrentUserEditForm();
+    this._populateCurrentUserEditForm();
   }
 
   _populateCurrentUserEditForm() {
-    this.userService.getCurrentUser().subscribe((res: User)=> {
+    this.userService.getCurrentUser().subscribe((res: User) => {
       this.editFormError['myUsername'].setValue(res.myUsername)
       this.editFormError['phone'].setValue(res.phone)
       this.editFormError['email'].setValue(res.email)
