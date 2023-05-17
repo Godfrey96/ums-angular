@@ -38,8 +38,12 @@ export class UserService {
   }
 
   updateUser(user: User) {
-    return this.http.post(this.apiUrl + "/update-user", user);
+    return this.http.put(this.apiUrl + "/update-user-details", user);
   }
+
+  // updateUserByAdmin(userId: number, user: User) {
+  //   return this.http.put(this.apiUrl + "/updateUser/" + userId, user);
+  // }
 
   deleteUser(userId: number) {
     return this.http.delete(this.apiUrl + "/delete/" + userId);

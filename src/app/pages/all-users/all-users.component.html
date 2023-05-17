@@ -33,39 +33,20 @@
                   <td *ngIf="users.status === 'false'">Deactive</td>
                   <td>
                     <div class="form-check form-switch">
-                      <input
-                        (change)="onUpdateUserStatus($event, users.id)"
-                        class="form-check-input"
-                        type="checkbox"
-                        [checked]="users.status === 'false'"
-                        role="switch"
-                        id="flexSwitchCheckDefault"
-                      />
-                      <input
-                        (change)="onUpdateUserStatus($event, users.id)"
-                        class="form-check-input"
-                        type="checkbox"
-                        [checked]="users.status === 'true'"
-                        role="switch"
-                        id="flexSwitchCheckDefault"
-                      />
+                      <input (change)="onUpdateUserStatus($event, users.id)" class="form-check-input" type="checkbox"
+                        [checked]="users.status === 'false'" role="switch" id="flexSwitchCheckDefault" />
+                      <input (change)="onUpdateUserStatus($event, users.id)" class="form-check-input" type="checkbox"
+                        [checked]="users.status === 'true'" role="switch" id="flexSwitchCheckDefault" />
                     </div>
                   </td>
                   <td>
-                    <button
-                      (click)="openUpdateUserModal(users.id)"
-                      class="btn btn-primary btn-sm"
-                      data-bs-toggle="modal"
-                      data-bs-target="#basicModal"
-                    >
+                    <button (click)="openUpdateUserModal(users.id)" class="btn btn-primary btn-sm"
+                      data-bs-toggle="modal" data-bs-target="#basicModal">
                       <i class="bi bi-pencil"></i>
                     </button>
                   </td>
                   <td>
-                    <button
-                      (click)="onDeleteUser(users.id)"
-                      class="btn btn-danger btn-sm"
-                    >
+                    <button (click)="onDeleteUser(users.id)" class="btn btn-danger btn-sm">
                       <i class="bi bi-trash"></i>
                     </button>
                   </td>
@@ -86,80 +67,47 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Update User</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form [formGroup]="updateForm">
           <div class="form-group">
             <label for="username">Username</label>
-            <input
-              type="text"
-              name="username"
-              class="form-control"
-              id="username"
-              aria-describedby="emailHelp"
-              placeholder="Username"
-              formControlName="myUsername"
-            />
+            <input type="text" name="username" class="form-control" id="username" aria-describedby="emailHelp"
+              placeholder="Username" formControlName="myUsername" />
           </div>
-          <small
-            *ngIf="updateFormError['myUsername'].invalid && isSubmitted"
-            class="p-error"
-            >Username is required
+          <small *ngIf="updateFormError['myUsername'].invalid && isSubmitted" class="p-error">Username is required
           </small>
           <div class="form-group">
             <label for="email">Email Address</label>
-            <input
-              type="email"
-              name="email"
-              class="form-control"
-              id="email"
-              placeholder="Email"
-              formControlName="email"
-            />
+            <input type="email" name="email" class="form-control" id="email" placeholder="Email" readonly
+              formControlName="email" />
           </div>
-          <small
-            *ngIf="updateFormError['email'].invalid && isSubmitted"
-            class="p-error"
-            >Email is required
+          <small *ngIf="updateFormError['email'].invalid && isSubmitted" class="p-error">Email is required
           </small>
           <div class="form-group">
             <label for="phone">Phone</label>
-            <input
-              type="text"
-              name="phone"
-              class="form-control"
-              id="phone"
-              name="phone"
-              placeholder="Phone"
-              formControlName="phone"
-            />
+            <input type="text" name="phone" class="form-control" id="phone" name="phone" placeholder="Phone"
+              formControlName="phone" />
           </div>
-          <small
-            *ngIf="updateFormError['phone'].invalid && isSubmitted"
-            class="p-error"
-            >Phone is required
+          <small *ngIf="updateFormError['phone'].invalid && isSubmitted" class="p-error">Phone is required
           </small>
+          <div class="form-group">
+            <label for="phone">Admin/ User </label>
+            <div class="form-check form-switch">
+              <input (change)="onUpdateUserRole($event)" [checked]="checkRole === 'false'" class="form-check-input"
+                type="checkbox" role="switch" id="flexSwitchCheckDefault" formControlName="role" />
+              <input (change)="onUpdateUserRole($event)" [checked]="checkRole === 'true'" class="form-check-input"
+                type="checkbox" role="switch" id="flexSwitchCheckDefault" formControlName="role" />
+            </div>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-outline-secondary"
-          data-bs-dismiss="modal"
-        >
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button
-          (click)="onSubmitUpdateUser()"
-          data-dismiss="modal"
-          class="btn btn-outline-primary"
-        >
+        <button (click)="onSubmitUpdateUser()" data-bs-dismiss="modal" class="btn btn-outline-primary">
           Save changes
         </button>
       </div>
