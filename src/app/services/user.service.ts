@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   apiUrl = environment.apiUrl + "/user";
+  public userId!: any;
 
   constructor(
     private http: HttpClient,
@@ -26,6 +27,10 @@ export class UserService {
 
   getCurrentUser() {
     return this.http.get(this.apiUrl + "/get-user");
+  }
+
+  getUserById(userId: number) {
+    return this.http.get(this.apiUrl + "/get/" + userId);
   }
 
   updateUserStatus(status: string) {

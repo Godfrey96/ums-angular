@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Subject } from 'rxjs';
 import { JwtResponse } from 'src/app/model/jwt-response';
@@ -22,19 +23,32 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   endsub$: Subject<any> = new Subject();
   deleteUser!: any;
   isChecked!: boolean;
+  updateForm!: FormGroup;
+  isSubmitted = false;
 
   constructor(
     private authService: AuthService,
     private userService: UserService,
     private ngxService: NgxUiLoaderService,
     private notificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.authService.userValue
     this.user = this.authService.userValue
+    this._initUpdateForm();
     this._getAllUsersOnly();
+  }
+
+  _initUpdateForm() {
+    this.updateForm = this.fb.group({
+      myUsername: ['', Validators.required],
+      phone: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
+    })
   }
 
 
@@ -52,6 +66,41 @@ export class AllUsersComponent implements OnInit, OnDestroy {
         this.responseMessage = this.notificationService.showError("Something went wrong", "BAD REQUEST");
       }
       this.notificationService.showError("Failed to fetch users", "ERROR");
+    })
+  }
+
+  openUpdateUserModal(userId: number) {
+    this.userService.getUserById(userId).subscribe((user: User) => {
+      this.updateFormError['myUsername'].setValue(user.myUsername);
+      this.updateFormError['phone'].setValue(user.phone);
+      this.updateFormError['email'].setValue(user.email);
+    })
+  }
+
+  onSubmitUpdateUser() {
+    this.ngxService.start();
+    this.isSubmitted = true;
+
+    const user: User = {
+      myUsername: this.updateFormError['myUsername'].value,
+      phone: this.updateFormError['phone'].value,
+      email: this.updateFormError['email'].value,
+    }
+
+    console.log('data-user: ', user)
+
+    this.userService.updateUser(user).subscribe((res: User) => {
+      this.ngxService.stop();
+      this.notificationService.showSuccess('User updated successfully', 'SUCCESS')
+    }, (error) => {
+      this.ngxService.stop();
+      if (error.status === 200) {
+        this.notificationService.showSuccess('User updated successfully', 'SUCCESS');
+        return;
+      } else {
+        this.ngxService.stop();
+        this.notificationService.showSuccess("Failed to update user", 'SUCCESS');
+      }
     })
   }
 
@@ -92,9 +141,6 @@ export class AllUsersComponent implements OnInit, OnDestroy {
     })
   }
 
-  onUpdateUser(id: any){
-    console.log('edit-id: ', id)
-  }
 
   onUpdateUserStatus(event: any, id: any) {
 
@@ -138,6 +184,11 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.endsub$.next(1);
     this.endsub$.complete()
+  }
+
+  // errors
+  get updateFormError() {
+    return this.updateForm.controls;
   }
 
 }

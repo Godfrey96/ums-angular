@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AllUsersRoutingModule } from './all-users-routing.module';
 import { AllUsersComponent } from './all-users.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +13,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AllUsersRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AllUsersModule { }
