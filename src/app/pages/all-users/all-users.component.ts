@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Subject } from 'rxjs';
 import { JwtResponse } from 'src/app/model/jwt-response';
+import { Role } from 'src/app/model/role';
 import { User } from 'src/app/model/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -25,6 +26,9 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   isChecked!: boolean;
   updateForm!: FormGroup;
   isSubmitted = false;
+  userUpdateId!: number;
+  role!: string;
+  checkRole!: any;
 
   constructor(
     private authService: AuthService,
@@ -47,7 +51,8 @@ export class AllUsersComponent implements OnInit, OnDestroy {
     this.updateForm = this.fb.group({
       myUsername: ['', Validators.required],
       phone: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
+      role: ['']
     })
   }
 
@@ -70,10 +75,20 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   }
 
   openUpdateUserModal(userId: number) {
+    this.userUpdateId = userId;
+    console.log('user-id: ', this.userUpdateId)
     this.userService.getUserById(userId).subscribe((user: User) => {
+      this.checkRole = user.role;
+      if(this.checkRole === 'ADMIN') {
+        this.checkRole = 'true';
+      } else if(this.checkRole === 'USER') {
+        this.checkRole = 'false';
+      }
+
       this.updateFormError['myUsername'].setValue(user.myUsername);
       this.updateFormError['phone'].setValue(user.phone);
       this.updateFormError['email'].setValue(user.email);
+      this.checkRole
     })
   }
 
@@ -81,25 +96,35 @@ export class AllUsersComponent implements OnInit, OnDestroy {
     this.ngxService.start();
     this.isSubmitted = true;
 
+    if(this.role === 'true'){
+      this.role = 'ADMIN'
+    } else if(this.role === 'false'){
+      this.role = 'USER'
+    }
+
     const user: User = {
       myUsername: this.updateFormError['myUsername'].value,
       phone: this.updateFormError['phone'].value,
       email: this.updateFormError['email'].value,
+      role: this.role
     }
 
-    console.log('data-user: ', user)
+    console.log('user-update: ', user)
 
     this.userService.updateUser(user).subscribe((res: User) => {
+      console.log('res-: ', res)
       this.ngxService.stop();
+      this._getAllUsersOnly();
       this.notificationService.showSuccess('User updated successfully', 'SUCCESS')
     }, (error) => {
       this.ngxService.stop();
       if (error.status === 200) {
         this.notificationService.showSuccess('User updated successfully', 'SUCCESS');
+        this._getAllUsersOnly();
         return;
       } else {
         this.ngxService.stop();
-        this.notificationService.showSuccess("Failed to update user", 'SUCCESS');
+        this.notificationService.showError("Failed to update user", 'INTERNAL_SERVER');
       }
     })
   }
@@ -126,7 +151,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
           error: (error) => {
             this.ngxService.stop();
             if (error.status === 200) {
-              this.notificationService.showSuccess("User updated successfully", 'SUCCESS');
+              this.notificationService.showSuccess("User Deleted successfully", 'SUCCESS');
               this._getAllUsersOnly();
               return;
             }
@@ -141,8 +166,19 @@ export class AllUsersComponent implements OnInit, OnDestroy {
     })
   }
 
+  onUpdateUserRole(event: any) {
 
-  onUpdateUserStatus(event: any, id: any) {
+    this.role = (event.target.checked).toString();
+
+    if(this.role === 'true'){
+      this.role = 'ADMIN'
+    } else if(this.role === 'false'){
+      this.role = 'USER'
+    }
+  }
+
+
+  onUpdateUserStatus(event: any, id: number) {
 
     var data: any = {
       status: (event.target.checked).toString(),
@@ -160,14 +196,14 @@ export class AllUsersComponent implements OnInit, OnDestroy {
     }).then((result) => {
       this.ngxService.start();
       if (result.value) {
-        Swal.fire('Disable!', 'User status updated successfully.', 'success');
+        Swal.fire('Enable!', 'User status updated successfully.', 'success');
         this.userService.updateUserStatus(data).subscribe({
           next: () => {
             this.ngxService.stop();
           }, error: (error) => {
             this.ngxService.stop();
             if (error.status === 200) {
-              this.notificationService.showSuccess("User disabled successfully", 'SUCCESS');
+              this.notificationService.showSuccess("User status updated successfully", 'SUCCESS');
               this._getAllUsersOnly();
               return;
             }
@@ -177,6 +213,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         this.ngxService.stop();
         Swal.fire('Cancelled', 'User status not updated.', 'error');
+        this._getAllUsersOnly();
       }
     })
   }
