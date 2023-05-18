@@ -1,4 +1,4 @@
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+<!-- <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <h2
       class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
@@ -82,51 +82,142 @@
       </div>
     </form>
   </div>
-</div>
+</div> -->
 
+<!-- component -->
 
-<!-- <section class="vh-100">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-6 text-black">
+<div class="min-h-screen flex flex-col items-center justify-center bg-gray-300">
+  <div
+    class="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md"
+  >
+    <div
+      class="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800"
+    >
+      Login To Your Account
+    </div>
+    <div class="mt-10">
+      <form [formGroup]="loginForm">
+        <div class="flex flex-col mb-6">
+          <label
+            for="email"
+            class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
+            >Email:</label
+          >
+          <div class="relative">
+            <div
+              class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400"
+            >
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                />
+              </svg>
+            </div>
 
-        <div class="px-5 ms-xl-4">
-          <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
-          <span class="h1 fw-bold mb-0">Logo</span>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              formControlName="email"
+              class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+              placeholder="Email"
+            />
+          </div>
+          <small
+            *ngIf="loginFormError['email'].invalid && isSubmitted"
+            class="p-error"
+          >
+            <span
+              *ngIf="
+                loginFormError['email'].errors &&
+                loginFormError['email'].errors['required']
+              "
+              >Email is required</span
+            >
+            <span
+              *ngIf="loginFormError['email'].errors && loginFormError['email']"
+              >Email is invalid</span
+            >
+          </small>
+        </div>
+        <div class="flex flex-col mb-6">
+          <label
+            for="password"
+            class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
+            >Password:</label
+          >
+          <div class="relative">
+            <div
+              class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400"
+            >
+              <span>
+                <svg
+                  class="h-6 w-6"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              </span>
+            </div>
+
+            <input
+              id="password"
+              type="password"
+              name="password"
+              formControlName="password"
+              class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+              placeholder="Password"
+            />
+          </div>
+          <small
+            *ngIf="loginFormError['password'].invalid && isSubmitted"
+            class="p-error"
+            >Password is required
+          </small>
         </div>
 
-        <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+        <!-- <div class="flex items-center mb-6 -mt-4">
+          <div class="flex ml-auto">
+            <a
+              href="#"
+              class="inline-flex text-xs sm:text-sm text-blue-500 hover:text-blue-700"
+              >Forgot Your Password?</a
+            >
+          </div>
+        </div> -->
 
-          <form style="width: 23rem;">
-
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
-
-            <div class="form-outline mb-4">
-              <input type="email" id="form2Example18" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example18">Email address</label>
-            </div>
-
-            <div class="form-outline mb-4">
-              <input type="password" id="form2Example28" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example28">Password</label>
-            </div>
-
-            <div class="pt-1 mb-4">
-              <button class="btn btn-info btn-lg btn-block" type="button">Login</button>
-            </div>
-
-            <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
-            <p>Don't have an account? <a routerLink="/signup" class="link-info">Register here</a></p>
-
-          </form>
-
+        <div class="flex w-full">
+          <button
+            (click)="onSubmit()"
+            class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-blue-600 hover:bg-blue-700 rounded py-2 w-full transition duration-150 ease-in"
+          >
+            <span class="mr-2 uppercase">Login</span>
+          </button>
         </div>
-
-      </div>
-      <div class="col-sm-6 px-0 d-none d-sm-block">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp"
-          alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
-      </div>
+      </form>
+    </div>
+    <div class="flex justify-center items-center mt-6">
+      <a
+        routerLink="/signup"
+        class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700 text-xs text-center"
+      >
+        <span class="ml-2">Don't have an account?</span>
+      </a>
     </div>
   </div>
-</section> -->
+</div>

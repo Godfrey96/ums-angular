@@ -61,6 +61,22 @@ export class UserService {
     return this.http.post(this.apiUrl + "/pfp", data);
   }
 
+  getTotalAdmins() {
+    return this.http.get(this.apiUrl + "/total-admins");
+  }
+
+  getTotalUsers() {
+    return this.http.get(this.apiUrl + "/total-users");
+  }
+
+  getTotalActive() {
+    return this.http.get(this.apiUrl + "/total-active");
+  }
+
+  getTotalDisable() {
+    return this.http.get(this.apiUrl + "/total-disable");
+  }
+
 
   public roleMatch(allowedRoles: string): any {
     let isMatch = false;
@@ -73,19 +89,6 @@ export class UserService {
     } {
       return false;
     }
-
-    // if (userRoles != null && userRoles) {
-    //   for (let i = 0; i < userRoles.length; i++) {
-    //     for (let j = 0; j < allowedRoles.length; j++) {
-    //       if (userRoles[i].role === allowedRoles) {
-    //         isMatch = true;
-    //         return isMatch;
-    //       } else {
-    //         return isMatch;
-    //       }
-    //     }
-    //   }
-    // }
 
   }
 }
