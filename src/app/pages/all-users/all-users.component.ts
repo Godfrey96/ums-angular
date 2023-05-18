@@ -111,7 +111,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
 
     console.log('user-update: ', user)
 
-    this.userService.updateUser(user).subscribe((res: User) => {
+    this.userService.updateUserByAdmin(user).subscribe((res: User) => {
       console.log('res-: ', res)
       this.ngxService.stop();
       this._getAllUsersOnly();

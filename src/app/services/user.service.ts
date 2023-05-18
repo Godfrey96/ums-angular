@@ -25,7 +25,7 @@ export class UserService {
     return this.http.get(this.apiUrl + "/get-users-only");
   }
 
-  getCurrentUser() {
+  getSingleUser() {
     return this.http.get(this.apiUrl + "/get-user");
   }
 
@@ -38,6 +38,10 @@ export class UserService {
   }
 
   updateUser(user: User) {
+    return this.http.put(this.apiUrl + "/update-user", user);
+  }
+
+  updateUserByAdmin(user: User) {
     return this.http.put(this.apiUrl + "/update-user-details", user);
   }
 
@@ -52,6 +56,11 @@ export class UserService {
   changePassword(data: any): Observable<string> {
     return this.http.post<string>(this.apiUrl + "/change-password", data);
   }
+
+  uploadImage(data: any) {
+    return this.http.post(this.apiUrl + "/pfp", data);
+  }
+
 
   public roleMatch(allowedRoles: string): any {
     let isMatch = false;

@@ -1,3 +1,4 @@
+import { Image } from "./image";
 import { Role } from "./role";
 
 export class User {
@@ -6,6 +7,7 @@ export class User {
     phone?: string;
     email?: string;
     password?: string;
+    profilePicture?: Image;
     status?: string;
     role?: string;
 }
