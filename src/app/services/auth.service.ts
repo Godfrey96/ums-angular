@@ -7,55 +7,42 @@ import { Router } from '@angular/router';
 import { JwtResponse } from '../model/jwt-response';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-  apiUrl = environment.apiUrl + "/auth";
+  apiUrl = environment.apiUrl + '/auth';
   private currentUserSource: BehaviorSubject<Partial<JwtResponse>>;
-  public currentUser$!: Observable<Partial<JwtResponse>>
+  public currentUser$!: Observable<Partial<JwtResponse>>;
 
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) {
-    this.currentUserSource = new BehaviorSubject<Partial<JwtResponse>>(
-      {token: localStorage.getItem('token') ||'',
-      user: JSON.parse(localStorage.getItem('user') || '{}').user
-    }
-    );
+  constructor(private http: HttpClient, private router: Router) {
+    this.currentUserSource = new BehaviorSubject<Partial<JwtResponse>>({
+      token: localStorage.getItem('token') || '',
+      user: JSON.parse(localStorage.getItem('user') || '{}').user,
+    });
     this.currentUser$ = this.currentUserSource.asObservable();
-
   }
 
   public get userValue(): Partial<JwtResponse> {
     return this.currentUserSource.value;
   }
 
-
   signup(user: User): Observable<User> {
     return this.http.post(this.apiUrl + '/register', user);
   }
 
   login(data: User): Observable<any> {
-    return this.http.post<JwtResponse>(this.apiUrl + "/login", data)
-      .pipe(
-        map((response: any) => {
-          const user = response;
-          console.log('user: ', user);
-          if (user) {
-            localStorage.setItem('user', JSON.stringify(user))
-            localStorage.setItem('token', user?.token)
-            this.currentUserSource.next(user)
-          }
-        })
-      );
+    return this.http.post<JwtResponse>(this.apiUrl + '/login', data).pipe(
+      map((response: any) => {
+        const user = response;
+        console.log('user: ', user);
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user));
+          localStorage.setItem('token', user?.token);
+          this.currentUserSource.next(user);
+        }
+      })
+    );
   }
-
-  changePassword(data: any) :Observable<string> {
-    return this.http.post<string>(this.apiUrl + "/change-password", data);
-  }
-
 
   getUser() {
     let user = localStorage.getItem('user');
@@ -78,6 +65,4 @@ export class AuthService {
     this.currentUserSource.next({});
     this.router.navigate(['/login']);
   }
-
-
 }

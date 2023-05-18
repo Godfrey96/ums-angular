@@ -15,7 +15,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private userService: UserService){}
 
   ngOnInit(){
-    this.userService.getCurrentUser().subscribe((user)=>{
+    this.userService.getSingleUser().subscribe((user)=>{
       this.currentLoggedInUser = user
       console.log('kkk: ', this.currentLoggedInUser)
     })

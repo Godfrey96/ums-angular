@@ -1,41 +1,13 @@
 <main id="main" class="main">
   <div class="pagetitle">
-    <h1>All Users</h1>
+    <h1>All Active Users</h1>
   </div>
   <section class="section mt-5">
-    <!-- <div class="row">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">All Users</h5>
-            <table class="table datatable">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Username</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Phone</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let users of allUsers; let i = index">
-                  <th scope="row">{{ i + 1 }}</th>
-                  <td>{{ users.myUsername }}</td>
-                  <td>{{ users.email }}</td>
-                  <td>{{ users.phone }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
 
     <div class="container" id="main-container">
       <div class="row">
-        <div *ngFor="let users of allUsers" class="col-md-6 col-xl-3">
-          <div class="card m-b-30" *ngIf="users.status === 'true'">
+        <div *ngFor="let users of allUsers" class="col-sm-3 mb-3 mb-sm-0">
+          <div class="card" *ngIf="users.status === 'true'">
             <div class="card-body row">
               <!-- <div class="col-6">
                     <a href=""><img src="{{employee?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a>
@@ -52,6 +24,41 @@
           </div>
         </div>
       </div>
+
+      <!-- <div class="row">
+        <div *ngFor="let users of allUsers">
+          <div class="card" *ngIf="users.status === 'true'">
+            <div class="card-body">
+              <div class="col-6 card-title align-self-center mb-0">
+                <h5>{{ users.myUsername}}</h5>
+              </div>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><i class="bi bi-envelope-fill float-right"></i>{{ users.email}}</li>
+              <li class="list-group-item"><i class="bi bi-telephone-fill float-right"></i>Phone : +27{{ users.phone}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <div class="row">
+        <div *ngFor="let users of allUsers" class="col-sm-6 mb-3 mb-sm-0">
+          <div class="card" *ngIf="users.status === 'true'">
+            <div class="card-body">
+              <div class="col-6 card-title align-self-center mb-0">
+                <h5>{{ users.myUsername}}</h5>
+              </div>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><i class="bi bi-envelope-fill float-right"></i>{{ users.email}}</li>
+              <li class="list-group-item"><i class="bi bi-telephone-fill float-right"></i>Phone : +27{{ users.phone}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+
     </div>
 
   </section>

@@ -17,7 +17,7 @@ export class OverviewComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.userService.getCurrentUser().subscribe((user)=>{
+    this.userService.getSingleUser().subscribe((user)=>{
       this.currentLoggedInUser = user
     })
   }

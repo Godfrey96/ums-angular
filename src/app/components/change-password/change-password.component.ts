@@ -10,22 +10,19 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.css']
+  styleUrls: ['./change-password.component.css'],
 })
 export class ChangePasswordComponent implements OnInit {
-
   changePasswordForm!: FormGroup;
   isSubmitted = false;
   responseMessage: any;
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    // private userService: UserService,
-    private router: Router,
+    private userService: UserService,
     private notificationService: NotificationService,
     private ngxService: NgxUiLoaderService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this._initChangePasswordForm();
@@ -35,19 +32,18 @@ export class ChangePasswordComponent implements OnInit {
     this.changePasswordForm = this.fb.group({
       oldPassword: ['', Validators.required],
       newPassword: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
-    })
+      confirmPassword: ['', Validators.required],
+    });
   }
 
   validatePassword() {
-    if (this.changePasswordFormError['newPassword'].value != this.changePasswordFormError['confirmPassword'].value)
+    if (
+      this.changePasswordFormError['newPassword'].value !=
+      this.changePasswordFormError['confirmPassword'].value
+    )
       return true;
-    else
-      return false;
-
+    else return false;
   }
-
-
 
   onSubmit() {
     this.ngxService.start();
@@ -57,62 +53,49 @@ export class ChangePasswordComponent implements OnInit {
       oldPassword: this.changePasswordFormError['oldPassword'].value,
       newPassword: this.changePasswordFormError['newPassword'].value,
       confirmPassword: this.changePasswordFormError['confirmPassword'].value,
-    }
+    };
 
-    this.authService.changePassword(data).subscribe((res: string) => {
-      if (!res) return;
-      this.ngxService.stop();
-      this.responseMessage = res;
-      this.notificationService.showSuccess("Password changed successfully", 'SUCCESS');
-    }, (error) => {
-      this.ngxService.stop();
-      if (error.status === 200) {
-        this.notificationService.showSuccess("Password changed successfully", 'SUCCESS');
+    this.userService.changePassword(data).subscribe(
+      (res: string) => {
+        this.ngxService.stop();
+        if (!res) return;
+        this.responseMessage = res;
+        this.notificationService.showSuccess(
+          'Password changed successfully',
+          'SUCCESS'
+        );
         this.changePasswordForm.reset();
-        return;
+      },
+      (error) => {
+        this.ngxService.stop();
+        if (error.status === 200) {
+          this.notificationService.showSuccess(
+            'Password changed successfully',
+            'SUCCESS'
+          );
+          // this.changePasswordForm.reset();
+          return;
+        }
+        if (error.error?.message) {
+          this.responseMessage = error.error?.message;
+        } else {
+          console.log('data-error: ', error);
+          this.responseMessage = this.notificationService.showError(
+            'Something went wrong',
+            'BAD REQUEST'
+          );
+        }
+        console.log('ERROR: ', error);
+        this.notificationService.showError(
+          'Failed to change password',
+          'ERROR'
+        );
       }
-      if (error.error?.message) {
-        this.responseMessage = error.error?.message;
-      } else {
-        console.log("data-error: ", error)
-        this.responseMessage = this.notificationService.showError("Something went wrong", "BAD REQUEST");
-      }
-      console.log("ERROR: ", error)
-      this.notificationService.showError("Failed to change password", "ERROR");
-    })
+    );
   }
-
-
-  // changePassword(data: {oldPassword: string; newPassword: string, confirmPassword: string}) {
-  //   this.userService.changePassword(data).subscribe({
-  //     next: (res: string) => {
-  //       if (!res) return;
-  //       console.log("data-user: ", res)
-  //       this.ngxService.stop();
-  //       this.responseMessage = res;
-  //       this.notificationService.showSuccess("Password changed successfully", 'SUCCESS');
-  //     },
-  //     error: (error) => {
-  //       this.ngxService.stop();
-  //       if (error.status === 200) {
-  //         this.notificationService.showSuccess("Password changed successfully", 'SUCCESS');
-  //         return;
-  //       }
-  //       if (error.error?.message) {
-  //         this.responseMessage = error.error?.message;
-  //       } else {
-  //         console.log("data-error: ", error)
-  //         this.responseMessage = this.notificationService.showError("Something went wrong", "BAD REQUEST");
-  //       }
-  //       console.log("ERROR: ", error)
-  //       this.notificationService.showError("Failed to change password", "ERROR");
-  //     }
-  //   })
-  // }
 
   // errors
   get changePasswordFormError() {
     return this.changePasswordForm.controls;
   }
-
 }
