@@ -1,204 +1,106 @@
 <div class="min-h-screen flex flex-col items-center justify-center bg-gray-300">
-  <div
-    class="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md"
-  >
-    <div
-      class="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800"
-    >
+  <div class="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
+    <div class="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800">
       Signup For A New Account
     </div>
     <div class="mt-10">
       <form [formGroup]="signUpForm">
         <div class="flex flex-col mb-6">
-          <label
-            for="myUsername"
-            class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
-            >Username:</label
-          >
+          <label for="myUsername" class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">Username:</label>
           <div class="relative">
-            <div
-              class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400"
-            >
-              <svg
-                class="h-6 w-6"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+            <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+              <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                viewBox="0 0 24 24" stroke="currentColor">
                 <path
-                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-                ></path>
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z">
+                </path>
               </svg>
             </div>
 
-            <input
-              id="myUsername"
-              type="myUsername"
-              name="myUsername"
-              formControlName="myUsername"
+            <input id="myUsername" type="myUsername" name="myUsername" formControlName="myUsername"
               formControlName="myUsername"
               class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
-              placeholder="Username"
-            />
+              placeholder="Username" />
           </div>
-          <small
-            *ngIf="signUpFormError['myUsername'].invalid && isSubmitted"
-            class="p-error"
-            >Username is required
+          <small *ngIf="signUpFormError['myUsername'].invalid && isSubmitted" class="p-error">Username is required
           </small>
         </div>
 
         <div class="flex flex-col mb-6">
-          <label
-            for="phone"
-            class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
-            >Phone:</label
-          >
+          <label for="phone" class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">Phone:</label>
           <div class="relative">
-            <div
-              class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400"
-            >
-              <svg
-                class="h-6 w-6"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+            <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+              <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                viewBox="0 0 24 24" stroke="currentColor">
                 <path
-                  d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
-                ></path>
+                  d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z">
+                </path>
               </svg>
             </div>
 
-            <input
-              id="phone"
-              type="phone"
-              name="phone"
-              formControlName="phone"
-              formControlName="phone"
+            <input id="phone" type="phone" name="phone" formControlName="phone" formControlName="phone"
               class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
-              placeholder="Phone "
-            />
+              placeholder="Phone " />
           </div>
-          <small
-            *ngIf="signUpFormError['phone'].invalid && isSubmitted"
-            class="p-error"
-            >Phone number is required
+          <small *ngIf="signUpFormError['phone'].invalid && isSubmitted" class="p-error">Phone number is required
           </small>
         </div>
 
         <div class="flex flex-col mb-6">
-          <label
-            for="email"
-            class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
-            >Email:</label
-          >
+          <label for="email" class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">Email:</label>
           <div class="relative">
-            <div
-              class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400"
-            >
-              <svg
-                class="h-6 w-6"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+            <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+              <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                viewBox="0 0 24 24" stroke="currentColor">
                 <path
-                  d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                />
+                  d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
               </svg>
             </div>
 
-            <input
-              id="email"
-              type="email"
-              name="email"
-              formControlName="email"
+            <input id="email" type="email" name="email" formControlName="email"
               class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
-              placeholder="Email"
-            />
+              placeholder="Email" />
           </div>
-          <small
-            *ngIf="signUpFormError['email'].invalid && isSubmitted"
-            class="p-error"
-          >
-            <span
-              *ngIf="
+          <small *ngIf="signUpFormError['email'].invalid && isSubmitted" class="p-error">
+            <span *ngIf="
                 signUpFormError['email'].errors &&
                 signUpFormError['email'].errors['required']
-              "
-              >Email is required</span
-            >
+              ">Email is required</span>
           </small>
         </div>
 
         <div class="flex flex-col mb-6">
-          <label
-            for="password"
-            class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
-            >Password:</label
-          >
+          <label for="password" class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">Password:</label>
           <div class="relative">
-            <div
-              class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400"
-            >
+            <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
               <span>
-                <svg
-                  class="h-6 w-6"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
+                <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  viewBox="0 0 24 24" stroke="currentColor">
                   <path
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                  />
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </span>
             </div>
 
-            <input
-              id="password"
-              type="password"
-              name="password"
-              formControlName="password"
+            <input id="password" type="password" name="password" formControlName="password"
               class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
-              placeholder="Password"
-            />
+              placeholder="Password" />
           </div>
-          <small
-            *ngIf="signUpFormError['password'].invalid && isSubmitted"
-            class="p-error"
-            >Password is required
+          <small *ngIf="signUpFormError['password'].invalid && isSubmitted" class="p-error">Password is required
           </small>
         </div>
 
         <div class="flex w-full">
-          <button
-            (click)="onSubmit()"
-            class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-blue-600 hover:bg-blue-700 rounded py-2 w-full transition duration-150 ease-in"
-          >
-            <span class="mr-2 uppercase">Login</span>
+          <button (click)="onSubmit()"
+            class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-blue-600 hover:bg-blue-700 rounded py-2 w-full transition duration-150 ease-in">
+            <span class="mr-2 uppercase">Sign up</span>
           </button>
         </div>
       </form>
     </div>
     <div class="flex justify-center items-center mt-6">
-      <a
-        routerLink="/login"
-        class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700 text-xs text-center"
-      >
+      <a routerLink="/login"
+        class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700 text-xs text-center">
         <span class="ml-2">Already have an account?</span>
       </a>
     </div>
