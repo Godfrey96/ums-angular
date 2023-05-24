@@ -21,15 +21,15 @@ import { AuthGuard } from './guards/auth.guard';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
-  text: "Loading...",
-  textColor: "#FFFFFF",
-  textPosition: "center-center",
-  bgsColor: "#00008B",
-  fgsColor: "#00008B",
+  text: 'Loading...',
+  textColor: '#FFFFFF',
+  textPosition: 'center-center',
+  bgsColor: '#00008B',
+  fgsColor: '#00008B',
   fgsType: SPINNER.ballSpinClockwise,
   fgsSize: 100,
-  hasProgressBar: false
-}
+  hasProgressBar: false,
+};
 
 @NgModule({
   declarations: [
@@ -59,8 +59,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   providers: [
     HttpClientModule,
     AuthGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
