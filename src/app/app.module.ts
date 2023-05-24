@@ -19,6 +19,7 @@ import { HeaderComponent } from './layouts/header/header.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { ApiModule } from './api';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: 'Loading...',
@@ -54,6 +55,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     ToastrModule.forRoot(),
     NgbModule,
+    ApiModule
   ],
 
   providers: [
@@ -63,4 +65,4 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
